@@ -4,3 +4,7 @@
 [submodule "lib/printf"]
 	path = lib/printf
 	url = git@github.com:MrJake222/printf.git
+[submodule "lib/lwmem"]
+	path = lib/lwmem
+	url = git@github.com:MaJerle/lwmem.git
+	branch = main

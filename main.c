@@ -1,3 +1,20 @@
+extern unsigned int _bss_start, _bss_end;
+extern unsigned int _data_start, _data_end, _data_src;
+extern unsigned int _heap_start, _heap_end;
+
+__attribute__ ((section(".boot")))
+__attribute__ ((naked))
+void _start(void) {
+	// init stack to 0x10000
+	// end of ram, grows downwards
+    asm("lui sp, 0x10");
+	// clear bss
+	for (unsigned int* bss=&_bss_start; bss<&_bss_end; *bss++ = 0);
+	// load data
+	for (unsigned int* data=&_data_start, *idata=&_data_src; data<&_data_end; *data++ = *idata++);
+	asm("j main");
+}
+
 #define UART0_BASE 	0x10010
 #define UART_DATA 	(*(volatile unsigned int*)(UART0_BASE + 0))
 #define UART_STATUS	(*(volatile unsigned int*)(UART0_BASE + 4))
@@ -9,7 +26,18 @@ void putchar_(char data) {
 	UART_DATA = data;
 }
 
+void delay_ms(int x) {
+	// tuned manually
+	// picorv32:  91 @ 24 MHz
+	// vexriscv: 167 @ 16 MHz
+	int i = 167 * x * 16;
+	while(i--) asm("");
+}
+
 #include <printf/printf.h>
+#include <lwmem/lwmem.h>
+void* __wrap_malloc(size_t size) { return lwmem_malloc(size); }
+void __wrap_free(void* ptr) { lwmem_free(ptr); }
 
 //#define DEBUG
 
@@ -19,20 +47,26 @@ float my_time_series[ACC_TIME_TICKS * ACC_AXIS];
 #define LEARNING_SAMPLES    16
 
 int main() {
+	lwmem_region_t regions[] = { { &_heap_start, (&_heap_end - &_heap_start) }, { NULL, 0 }	};
+	printf("heap start %p (size %d)\n", regions[0].start_addr, regions[0].size);
+	lwmem_assignmem(regions);
+	
 	printf("please input data\n");
 	
 	int ticks_stored = 0;
-	int ret = 0;
-	bool learning = true;
+	int learning = 1;
 	int learning_samples = 0;
 	
 	while (1) {
+		
 		/*ret = scanf("%f %f %f",	&my_time_series[ticks_stored * ACC_AXIS + 0], 
 								&my_time_series[ticks_stored * ACC_AXIS + 1], 
 								&my_time_series[ticks_stored * ACC_AXIS + 2]);*/
 								
-		if (ret < 3)
-			break;
+		my_time_series[ticks_stored * ACC_AXIS + 0] = 0;
+		my_time_series[ticks_stored * ACC_AXIS + 1] = 1;
+		my_time_series[ticks_stored * ACC_AXIS + 2] = 2;
+		delay_ms(1000 / ACC_TIME_TICKS); // process each second
 		
 		#if DEBUG	
 			printf("r=%d, storing tick %d: %5.2f %5.2f %5.2f\n", ret, ticks_stored,
@@ -54,7 +88,7 @@ int main() {
 
 				if (learning_samples == LEARNING_SAMPLES) {
 					learning_samples = 0;
-					learning = false;
+					learning = 0;
 					//printf("learning end\n");
 				}
 			}

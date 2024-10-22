@@ -18,26 +18,41 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(BUILD_SHARED_LIBS OFF)
 set(OPTS
+		-O2
+		-Wall -g
 		-ffreestanding
 		-nostartfiles
-		#-nostdlib
-		-Wall -g
-		-O2
+		
+		# warns
 		-Wdouble-promotion -Wfloat-conversion
+		
+		# custom linker script
+		-Wl,-T${CMAKE_SOURCE_DIR}/linker.ld
+		
+		# wrap malloc, dirty, no sdk support
+		-Wl,--wrap=malloc,--wrap=free
+		-fno-builtin-malloc
+		
+		# remove unused
+		-fdata-sections -ffunction-sections
+		-Wl,--gc-sections
+		-Wl,-e_start
 		)
 
 add_compile_options(${OPTS})
-
-include_directories(include) # include printf_config
+add_link_options(${OPTS})
 
 add_compile_definitions(
 		NDEBUG
 		PRINTF_INCLUDE_CONFIG_H=1
 		)
 
+include_directories(include)
+
 # libraries
 add_subdirectory(lib/fogml_sdk)
 add_subdirectory(lib/printf)
+add_subdirectory(lib/lwmem)
 
 # this project private files files
 add_executable(${PROJECT_NAME}
@@ -47,11 +62,7 @@ add_executable(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
 		fogml_sdk
 		printf
-		)
-
-target_link_options(${PROJECT_NAME} PRIVATE
-		${OPTS}
-		#-T${CMAKE_SOURCE_DIR}/linker.ld
+		lwmem
 		)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

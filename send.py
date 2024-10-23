@@ -24,6 +24,9 @@ for i, l in enumerate(sys.stdin):
 		prnline() # learning / classifying
 		
 		start = time.time()
+		prnline() # DSP time
+		prnline() # RES time
+		prnline() # LOF time
 		prnline() # finished / lof score
 		end = time.time()
 		

@@ -39,6 +39,9 @@ void delay_ms(int x) {
 	while(i--) asm("");
 }
 
+#define TIMER_BASE 	0x10018
+#define TIME (*(volatile unsigned int*)(TIMER_BASE))
+
 #include <printf/printf.h>
 #include <lwmem/lwmem.h>
 void* __wrap_malloc(size_t size) { return lwmem_malloc(size); }

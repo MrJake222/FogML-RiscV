@@ -18,6 +18,8 @@ set(CMAKE_CXX_STANDARD 17)
 
 option(BUILD_SHARED_LIBS OFF)
 set(OPTS
+		-march=rv32i
+		
 		-O2
 		-Wall -g
 		-ffreestanding

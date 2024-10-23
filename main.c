@@ -26,6 +26,11 @@ void putchar_(char data) {
 	UART_DATA = data;
 }
 
+int readchar() {
+	while (!UART_HAS_RX);
+	return UART_DATA;
+}
+
 void delay_ms(int x) {
 	// tuned manually
 	// picorv32:  91 @ 24 MHz
@@ -39,37 +44,41 @@ void delay_ms(int x) {
 void* __wrap_malloc(size_t size) { return lwmem_malloc(size); }
 void __wrap_free(void* ptr) { lwmem_free(ptr); }
 
-//#define DEBUG
+#define DEBUG
 
 #include "fogml_config.h"
 float my_time_series[ACC_TIME_TICKS * ACC_AXIS];
 
 #define LEARNING_SAMPLES    16
 
+float readfloat() {
+	// read little endian float
+	unsigned int buf = 0;
+	buf |= readchar();
+	buf |= readchar() << 8;
+	buf |= readchar() << 16;
+	buf |= readchar() << 24;
+	return *(float*)&buf;
+}
+
 int main() {
 	lwmem_region_t regions[] = { { &_heap_start, (&_heap_end - &_heap_start) }, { NULL, 0 }	};
-	printf("heap start %p (size %d)\n", regions[0].start_addr, regions[0].size);
+	//printf("heap start %p (size %d)\n", regions[0].start_addr, regions[0].size);
 	lwmem_assignmem(regions);
 	
-	printf("please input data\n");
+	//printf("please input data\n");
 	
 	int ticks_stored = 0;
 	int learning = 1;
 	int learning_samples = 0;
 	
 	while (1) {
+		my_time_series[ticks_stored * ACC_AXIS + 0] = readfloat();
+		my_time_series[ticks_stored * ACC_AXIS + 1] = readfloat();
+		my_time_series[ticks_stored * ACC_AXIS + 2] = readfloat();
 		
-		/*ret = scanf("%f %f %f",	&my_time_series[ticks_stored * ACC_AXIS + 0], 
-								&my_time_series[ticks_stored * ACC_AXIS + 1], 
-								&my_time_series[ticks_stored * ACC_AXIS + 2]);*/
-								
-		my_time_series[ticks_stored * ACC_AXIS + 0] = 0;
-		my_time_series[ticks_stored * ACC_AXIS + 1] = 1;
-		my_time_series[ticks_stored * ACC_AXIS + 2] = 2;
-		delay_ms(1000 / ACC_TIME_TICKS); // process each second
-		
-		#if DEBUG	
-			printf("r=%d, storing tick %d: %5.2f %5.2f %5.2f\n", ret, ticks_stored,
+		#ifdef DEBUG
+			printf("storing tick %2d: %10.7f %10.7f %10.7f\n", ticks_stored,
 				my_time_series[ticks_stored * ACC_AXIS + 0],
 				my_time_series[ticks_stored * ACC_AXIS + 1],
 				my_time_series[ticks_stored * ACC_AXIS + 2]);
@@ -91,8 +100,12 @@ int main() {
 					learning = 0;
 					//printf("learning end\n");
 				}
+				
+				printf("finished learning\n");
 			}
 			else {
+				printf("classifying...\n");
+				
 				float score;
 				fogml_processing(my_time_series, &score);
 				// fogml_classification(my_time_series);

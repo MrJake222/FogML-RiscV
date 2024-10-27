@@ -147,23 +147,32 @@ void fogml_processing(float *time_series_data, float *score) {
 
     free(vector);
 } 
-/*
-void fogml_classification(float *time_series_data) {
-    float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
-    tinyml_dsp(time_series_data, vector, &my_dsp_config);
-    int cl;
 
-    cl = classifier(vector);
+void fogml_classification(float *time_series_data, int* cl) {
+    float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
+    
+    int start, end;
+
+    start = TIME;
+    tinyml_dsp(time_series_data, vector, &my_dsp_config);
+    end = TIME;
+    printf("RF DSP took %.2f sec\n", (float)(end-start)/1000000);
+    
+    start = TIME;
+    *cl = classifier(vector);
+    end = TIME;
+    printf("RF cls took %.2f sec\n", (float)(end-start)/1000000);
+
 
 #ifdef FOGML_VERBOSE
     fogml_printf("Detected  class = ");
-    fogml_printf_int(cl);
+    fogml_printf_int(*cl);
     fogml_printf("\n");
 #endif
 
     free(vector);
 } 
-*/
+
 void fogml_features_logger(float *time_series_data) {
     float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
     tinyml_dsp(time_series_data, vector, &my_dsp_config);

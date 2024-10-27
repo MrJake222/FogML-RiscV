@@ -110,11 +110,13 @@ int main() {
 				printf("classifying...\n");
 				
 				float score;
-				fogml_processing(my_time_series, &score);
-				// fogml_classification(my_time_series);
-				
+				fogml_processing(my_time_series, &score);				
 				printf("LOF Score = %5.2f, %s\n", score, (score > 2.5f ? "fail" : "ok"));
 			}
+			
+			int cl;
+			fogml_classification(my_time_series, &cl);
+			printf("RF class = %d\n", cl);
 						
 			ticks_stored = 0;
 		}

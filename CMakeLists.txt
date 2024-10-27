@@ -20,7 +20,7 @@ option(BUILD_SHARED_LIBS OFF)
 set(OPTS
 		-march=rv32i
 		
-		-O2
+		-Os
 		-Wall -g
 		-ffreestanding
 		-nostartfiles
@@ -59,6 +59,7 @@ add_subdirectory(lib/lwmem)
 # this project private files files
 add_executable(${PROJECT_NAME}
 		main.c
+		src/random_forest_model.c
 		)
 
 target_link_libraries(${PROJECT_NAME}

@@ -17,7 +17,7 @@ It sends raw float data in little-endian binary format. For each sample (3 axis 
 
 ### Results
 In my [Risc-V survey](https://github.com/MrJake222/riscv-ice40) core VexRiscV (smprod_my, RV32I) @ 16MHz, -O2
-learning took 24s for learning pass (1-st pass, then it increases?) and 0.6s for inference pass:
+learning took from 24s (1st pass) to 31.4s (24th pass) and 0.6s for inference pass:
 ```
 processing...
 learning...
@@ -29,13 +29,15 @@ finished learning
 ```
 Most learning time is spent in `tinyml_lof_learn()` -- 99.8%.
 Out of it 98% is calculating k-nearest neighbors O(n^2) with euclidean distance.
-Modifications (learning time, applied separately):
+Modifications (learning time 1st pass, applied separately):
 - 24.0s -O3,
 - 24.2s -Os,
 - 23.4s no sqrt on distance,
 - 14.3s taxicab distance,
 -  8.5s with dummy +1 in loop,
 -  0.4s no loop.
+
+Last 4 modification applied to `tinyml_lof_normal_distance_vec()` in `anomaly_rt/fogml_lof.c`.
 
 Random forest takes 0.1s to complete (including 0.06s for DSP).
 Only -Os tested (-O2 random forest won't fit):

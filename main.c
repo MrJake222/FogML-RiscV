@@ -70,6 +70,7 @@ int main() {
 	lwmem_assignmem(regions);
 	
 	//printf("please input data\n");
+	printf("fogml vector size: %d\n", FOGML_VECTOR_SIZE);
 	
 	int ticks_stored = 0;
 	int learning = 1;

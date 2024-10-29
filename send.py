@@ -13,6 +13,8 @@ def getline(prn=True, end="\n"):
 		print(line, end=end)
 	return line
 
+getline()
+
 for i, l in enumerate(sys.stdin):
 	for x in l.strip().split():
 		x = float(x)

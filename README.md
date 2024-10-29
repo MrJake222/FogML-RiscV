@@ -9,6 +9,7 @@ This project uses CMake, so: `mkdir build`, `cd build`, `cmake ..`, `make`
 For now, you'll need dummy data from [FogML-Linux](https://github.com/MrJake222/FogML-Linux/).
 - Generate data: `gendata/sim.py > data-sim-x24` (FogML-Linux),
 - Redirect & send data: `./send.py < data-sim-x24`,
+- Reset the core (press the button),
 - Observe the model learn for 16, then ok for 8, and fail for 8 iterations.
 
 ### Send protocol

@@ -29,14 +29,17 @@ for i, l in enumerate(sys.stdin):
 			getline() # DSP time
 			getline() # RES time
 			getline() # LOF time
+		else:
+			getline() # DSP time
+			getline() # LOF time
 		getline() # finished / lof score
 		end = time.time()
-		print(f"[P {(i+1)//64:02d}] lof took: {end - start:.1f} sec")
+		print(f"[P {(i+1)//64:02d}] lof took: {end - start:.2f} sec")
 
 		start = time.time()
 		getline() # RF DSP
 		getline() # RF cls
 		getline() # RF result
 		end = time.time()
-		print(f"[P {(i+1)//64:02d}] rf took: {end - start:.1f} sec")
+		print(f"[P {(i+1)//64:02d}] rf took: {end - start:.2f} sec")
 		print()

@@ -127,7 +127,13 @@ void fogml_learning(float *time_series_data) {
 
 void fogml_processing(float *time_series_data, float *score) {
     float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
+    
+    int start, end;
+    
+    start = TIME;
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
+    end = TIME;
+    printf("DSP took %.2f sec\n", (float)(end-start)/1000000);
 
 #ifdef FOGML_VERBOSE
     for(int i = 0; i < FOGML_VECTOR_SIZE; i++) {
@@ -137,7 +143,10 @@ void fogml_processing(float *time_series_data, float *score) {
     fogml_printf("\n");
 #endif
 
+    start = TIME;
     *score = tinyml_lof_score(vector, &my_lof_config);
+    end = TIME;
+    printf("LOF took %.2f sec\n", (float)(end-start)/1000000);
 
 #ifdef FOGML_VERBOSE
     fogml_printf("LOF Score = ");

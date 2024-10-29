@@ -25,15 +25,25 @@ DSP took 0.06 sec
 RES took 0.00 sec
 LOF took 23.98 sec
 finished learning
-[P 01] lof took: 24.0 sec
+[P 01] lof took: 24.04 sec
 ```
+```
+processing...
+classifying...
+DSP took 0.06 sec
+LOF took 0.50 sec
+LOF Score =  0.98, ok
+[P 17] lof took: 0.56 sec
+```
+**These results are with FFT turned off.**
+
 Most learning time is spent in `tinyml_lof_learn()` -- 99.8%.
 Out of it 98% is calculating k-nearest neighbors O(n^2) with euclidean distance.
 Modifications (learning time 1st pass, applied separately):
 - 24.0s -O3,
 - 24.2s -Os,
 - 23.4s no sqrt on distance,
-- 14.3s taxicab distance,
+- 14.3s taxicab distance (learning 0.22s),
 -  8.5s with dummy +1 in loop,
 -  0.4s no loop.
 
@@ -45,7 +55,7 @@ Only -Os tested (-O2 random forest won't fit):
 RF DSP took 0.06 sec
 RF cls took 0.00 sec
 RF class = 2
-[P 01] rf took: 0.1 sec
+[P 01] rf took: 0.07 sec
 ```
 
 ## Other files

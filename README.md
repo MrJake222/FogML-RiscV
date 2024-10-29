@@ -2,7 +2,7 @@
 
 Based on [FogML-Arduino](https://github.com/tszydlo/FogML-Arduino).
 
-## Compilation
+### Compilation
 This project uses CMake, so: `mkdir build`, `cd build`, `cmake ..`, `make`
 
 ## Usage
@@ -15,7 +15,7 @@ For now, you'll need dummy data from [FogML-Linux](https://github.com/MrJake222/
 It sends raw float data in little-endian binary format. For each sample (3 axis x 4-byte float)
 12 bytes is needed. The code echoes read data in human-readable format for verification.
 
-### Results
+## Results
 In my [Risc-V survey](https://github.com/MrJake222/riscv-ice40) core VexRiscV (smprod_my, RV32I) @ 16MHz, -O2
 learning took from 24s (1st pass) to 31.4s (24th pass) and 0.6s for inference pass:
 ```

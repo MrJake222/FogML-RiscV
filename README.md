@@ -20,11 +20,14 @@ It sends raw float data in little-endian binary format. For each sample (3 axis 
 In my [Risc-V survey](https://github.com/MrJake222/riscv-ice40) core VexRiscV (smprod_my, RV32I) @ 16MHz, -O2
 learning took from 24s (1st pass) to 31.4s (24th pass) and 0.6s for inference pass:
 ```
+fogml vector size: 12
+```
+```
 processing...
 learning...
 DSP took 0.06 sec
 RES took 0.00 sec
-LOF took 23.98 sec
+LOF took 23.98 sec (99.8%)
 finished learning
 [P 01] lof took: 24.04 sec
 ```
@@ -32,7 +35,7 @@ finished learning
 processing...
 classifying...
 DSP took 0.06 sec
-LOF took 0.50 sec
+LOF took 0.50 sec (89.3%)
 LOF Score =  0.98, ok
 [P 17] lof took: 0.56 sec
 ```
@@ -50,7 +53,38 @@ Modifications (learning time 1st pass, applied separately):
 
 Last 4 modification applied to `tinyml_lof_normal_distance_vec()` in `anomaly_rt/fogml_lof.c`.
 
-Random forest takes 0.1s to complete (including 0.06s for DSP).
+### With FFT
+This is -Os since defaults changes (minor speed decrease).
+The DSP time naturally increased (added FFT block), but also the LOF time,
+as the feature vector got longer.
+Code & results on `fft` branch.
+```
+fogml vector size: 18
+```
+```
+processing...
+learning...
+DSP took 0.38 sec
+RES took 0.00 sec
+LOF took 35.48 sec (98.9%)
+finished learning
+[P 01] lof took: 35.87 sec
+```
+```
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec (74.7%)
+LOF Score =  0.98, ok
+[P 17] lof took: 0.95 sec
+```
+
+Percent of LOF time in learning has barely reduced (~1%p). Inference
+shifted more (~14.5%p)
+
+### Random forests
+
+Random forest takes 0.07s to complete (including 0.06s for DSP).
 Only -Os tested (-O2 random forest won't fit):
 ```
 RF DSP took 0.06 sec

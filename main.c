@@ -82,10 +82,11 @@ int main() {
 		my_time_series[ticks_stored * ACC_AXIS + 2] = readfloat();
 		
 		#ifdef DEBUG
+			// cast to prevent warnings (yes, I know about double promotion here)
 			printf("storing tick %2d: %10.7f %10.7f %10.7f\n", ticks_stored,
-				my_time_series[ticks_stored * ACC_AXIS + 0],
-				my_time_series[ticks_stored * ACC_AXIS + 1],
-				my_time_series[ticks_stored * ACC_AXIS + 2]);
+				(double)my_time_series[ticks_stored * ACC_AXIS + 0],
+				(double)my_time_series[ticks_stored * ACC_AXIS + 1],
+				(double)my_time_series[ticks_stored * ACC_AXIS + 2]);
 		#endif
 			
 		ticks_stored++;
@@ -112,7 +113,7 @@ int main() {
 				
 				float score;
 				fogml_processing(my_time_series, &score);				
-				printf("LOF Score = %5.2f, %s\n", score, (score > 2.5f ? "fail" : "ok"));
+				printf("LOF Score = %5.2f, %s\n", (double)score, (score > 2.5f ? "fail" : "ok"));
 			}
 			
 			int cl;

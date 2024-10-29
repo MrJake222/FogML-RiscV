@@ -1,0 +1,368 @@
+fogml vector size: 18
+processing...
+learning...
+DSP took 0.38 sec
+RES took 0.00 sec
+LOF took 35.48 sec
+finished learning
+[P 01] lof took: 35.87 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 01] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 36.20 sec
+finished learning
+[P 02] lof took: 36.44 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 02] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 36.90 sec
+finished learning
+[P 03] lof took: 37.15 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 03] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 37.60 sec
+finished learning
+[P 04] lof took: 37.85 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 04] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 38.29 sec
+finished learning
+[P 05] lof took: 38.53 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 05] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 38.97 sec
+finished learning
+[P 06] lof took: 39.22 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 06] rf took: 0.24 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 39.65 sec
+finished learning
+[P 07] lof took: 39.90 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 07] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 40.32 sec
+finished learning
+[P 08] lof took: 40.57 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 08] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 40.99 sec
+finished learning
+[P 09] lof took: 41.23 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 09] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 41.64 sec
+finished learning
+[P 10] lof took: 41.89 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 10] rf took: 0.24 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 42.29 sec
+finished learning
+[P 11] lof took: 42.53 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 11] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 42.93 sec
+finished learning
+[P 12] lof took: 43.17 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 12] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 43.55 sec
+finished learning
+[P 13] lof took: 43.80 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 13] rf took: 0.25 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 44.17 sec
+finished learning
+[P 14] lof took: 44.41 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 14] rf took: 0.24 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 44.79 sec
+finished learning
+[P 15] lof took: 45.03 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 15] rf took: 0.24 sec
+
+processing...
+learning...
+DSP took 0.24 sec
+RES took 0.00 sec
+LOF took 45.39 sec
+finished learning
+[P 16] lof took: 45.63 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 16] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  0.98, ok
+[P 17] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 17] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.70 sec
+LOF Score =  0.91, ok
+[P 18] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 18] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  2.05, ok
+[P 19] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 19] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.70 sec
+LOF Score =  1.17, ok
+[P 20] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 20] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  0.98, ok
+[P 21] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 21] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  2.08, ok
+[P 22] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 22] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  0.96, ok
+[P 23] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 23] rf took: 0.24 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score =  0.98, ok
+[P 24] lof took: 0.95 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 24] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 14.73, fail
+[P 25] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 25] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.71 sec
+LOF Score = 16.13, fail
+[P 26] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 26] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 17.00, fail
+[P 27] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 27] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 17.04, fail
+[P 28] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 28] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 16.85, fail
+[P 29] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 29] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 15.93, fail
+[P 30] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 30] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 14.66, fail
+[P 31] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 31] rf took: 0.25 sec
+
+processing...
+classifying...
+DSP took 0.24 sec
+LOF took 0.72 sec
+LOF Score = 18.28, fail
+[P 32] lof took: 0.96 sec
+RF DSP took 0.24 sec
+RF cls took 0.00 sec
+RF class = 2
+[P 32] rf took: 0.25 sec

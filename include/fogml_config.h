@@ -117,6 +117,9 @@ void fogml_learning(float *time_series_data) {
     fogml_printf("\n");
 #endif
 
+    // update data size
+    my_lof_config.n = my_rs_config.k;
+
     start = TIME;
     tinyml_lof_learn(&my_lof_config);
     end = TIME;

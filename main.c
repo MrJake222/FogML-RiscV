@@ -47,7 +47,8 @@ void delay_ms(int x) {
 void* __wrap_malloc(size_t size) { return lwmem_malloc(size); }
 void __wrap_free(void* ptr) { lwmem_free(ptr); }
 
-#define DEBUG
+//#define DEBUG
+#define EOT 0x04
 
 #include "fogml_config.h"
 float my_time_series[ACC_TIME_TICKS * ACC_AXIS];
@@ -66,14 +67,9 @@ float readfloat() {
 
 int main() {
 	lwmem_region_t regions[] = { { &_heap_start, (&_heap_end - &_heap_start) }, { NULL, 0 }	};
-	//printf("heap start %p (size %d)\n", regions[0].start_addr, regions[0].size);
 	lwmem_assignmem(regions);
 	
-	//printf("please input data\n");
-	printf("fogml vector size: %d\n", FOGML_VECTOR_SIZE);
-	
 	int ticks_stored = 0;
-	int learning = 1;
 	int learning_samples = 0;
 	
 	while (1) {
@@ -92,20 +88,20 @@ int main() {
 		ticks_stored++;
 
 		if (ticks_stored == ACC_TIME_TICKS) {
-			 printf("processing...\n");
+			printf("select action (L/C)...\n");
 			
+			int learning = 0;
+			char action = readchar();
+			switch (action) {
+				case 'L': learning = 1; break;
+				case 'C': learning = 0; break;
+				default: break;
+			}
+
 			if (learning) {
 				printf("learning...\n");
-
-				fogml_learning(my_time_series);
-				learning_samples++;
-
-				if (learning_samples == LEARNING_SAMPLES) {
-					learning_samples = 0;
-					learning = 0;
-					//printf("learning end\n");
-				}
 				
+				fogml_learning(my_time_series);
 				printf("finished learning\n");
 			}
 			else {
@@ -116,11 +112,12 @@ int main() {
 				printf("LOF Score = %5.2f, %s\n", (double)score, (score > 2.5f ? "fail" : "ok"));
 			}
 			
-			int cl;
-			fogml_classification(my_time_series, &cl);
-			printf("RF class = %d\n", cl);
+			//int cl;
+			//fogml_classification(my_time_series, &cl);
+			//printf("RF class = %d\n", cl);
 						
 			ticks_stored = 0;
+			printf("%c\n", EOT);
 		}
 	}
 }

@@ -70,7 +70,7 @@ int main() {
 	lwmem_assignmem(regions);
 	
 	int ticks_stored = 0;
-	int learning_samples = 0;
+	int pass = 0;
 	
 	while (1) {
 		my_time_series[ticks_stored * ACC_AXIS + 0] = readfloat();
@@ -88,7 +88,9 @@ int main() {
 		ticks_stored++;
 
 		if (ticks_stored == ACC_TIME_TICKS) {
-			printf("select action (L/C)...\n");
+			pass++;
+			
+			printf("pass %2d select action...\n", pass);
 			
 			int learning = 0;
 			char action = readchar();

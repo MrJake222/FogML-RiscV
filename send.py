@@ -15,7 +15,7 @@ for i, l in enumerate(sys.stdin, start=1):
 		req += struct.pack("<f", float(x))
 	
 	if i % 64 == 0:
-		if i//64 < 16:
+		if i//64 <= 16:
 			action = 'L'
 		else:
 			action = 'C'

@@ -2,6 +2,8 @@
 
 Based on [FogML-Arduino](https://github.com/tszydlo/FogML-Arduino).
 
+Uses VexRiscV and other software listed in my [riscv-ice40](https://github.com/MrJake222/riscv-ice40) survey repo.
+
 ### Compilation
 This project uses CMake, so: `mkdir build`, `cd build`, `cmake ..`, `make`
 

@@ -53,8 +53,6 @@ void __wrap_free(void* ptr) { lwmem_free(ptr); }
 #include "fogml_config.h"
 float my_time_series[ACC_TIME_TICKS * ACC_AXIS];
 
-#define LEARNING_SAMPLES    16
-
 float readfloat() {
 	// read little endian float
 	unsigned int buf = 0;
@@ -90,34 +88,56 @@ int main() {
 		if (ticks_stored == ACC_TIME_TICKS) {
 			pass++;
 			
+			#ifdef DEBUG
 			printf("pass %2d select action...\n", pass);
+			#endif
 			
-			int learning = 0;
+			int cl;
 			char action = readchar();
 			switch (action) {
-				case 'L': learning = 1; break;
-				case 'C': learning = 0; break;
-				default: break;
-			}
-
-			if (learning) {
-				printf("learning...\n");
+				case 'R':
+					// reservoir fill only (no learn)
+					#ifdef DEBUG
+					printf("filling...\n");
+					#endif
+					
+					fogml_learning(my_time_series, 0);
+					
+					#ifdef DEBUG
+					printf("finished filling...\n");
+					#endif
+					break;
 				
-				fogml_learning(my_time_series);
-				printf("finished learning\n");
-			}
-			else {
-				printf("classifying...\n");
+				case 'L':
+					// reservoir fill + learn
+					printf("\nlearning...\n");
+					fogml_learning(my_time_series, 1);
+					printf("finished learning\n\n");
+					break;
 				
-				float score;
-				fogml_processing(my_time_series, &score);				
-				printf("LOF Score = %5.2f, %s\n", (double)score, (score > 2.5f ? "fail" : "ok"));
+				case 'C':
+					// classify
+					#ifdef DEBUG
+					printf("classifying...\n");
+					#endif
+					
+					float score;
+					fogml_processing(my_time_series, &score);				
+					printf("LOF Score = %5.2f, %s\n\n", (double)score, (score > 2.5f ? "fail" : "ok"));
+					
+					break;
+					
+				case 'F':
+					// forest
+					//fogml_classification(my_time_series, &cl);
+					//printf("RF class = %d\n", cl);
+					break;
+					
+				default:
+					printf("incorrect action: %c\n", action);
+					break;
 			}
 			
-			//int cl;
-			//fogml_classification(my_time_series, &cl);
-			//printf("RF class = %d\n", cl);
-						
 			ticks_stored = 0;
 			printf("%c\n", EOT);
 		}

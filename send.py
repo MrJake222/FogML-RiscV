@@ -5,9 +5,14 @@ import time
 import struct
 import serial
 
-ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
+if len(sys.argv) != 2:
+	print(f"usage: {sys.argv[0]} [reservoir fill level]")
+	exit(1)
 
+FILL_SAMPLES = int(sys.argv[1])
 EOT = 0x04
+
+ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
 
 req = bytes()
 for i, l in enumerate(sys.stdin, start=1):
@@ -15,7 +20,10 @@ for i, l in enumerate(sys.stdin, start=1):
 		req += struct.pack("<f", float(x))
 	
 	if i % 64 == 0:
-		if i//64 <= 16:
+		samples = i//64
+		if samples < FILL_SAMPLES:
+			action = 'R'
+		elif samples == FILL_SAMPLES:
 			action = 'L'
 		else:
 			action = 'C'
@@ -30,4 +38,4 @@ for i, l in enumerate(sys.stdin, start=1):
 				break
 			print(line.decode("utf-8").strip())
 		
-		print()
+		# print()

@@ -89,7 +89,7 @@ tinyml_lof_config_t my_lof_config = {
 
 #define DFsec(a,b) (  (double) ((a-b) / 1000000.0f)  )
 
-void fogml_learning(float *time_series_data) {
+void fogml_learning(float *time_series_data, int learn) {
 #ifdef FOGML_VERBOSE
     fogml_printf("Updating reservoir.");
 #endif
@@ -101,12 +101,15 @@ void fogml_learning(float *time_series_data) {
     start = TIME;
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
-    printf("DSP took %.2f sec\n", DFsec(end, start));
+    if (learn)
+		printf("DSP took %.2f sec\n", DFsec(end, start));
 
     start = TIME;
     tinyml_reservoir_sampling(vector, &my_rs_config);
     end = TIME;
-    printf("RES took %.2f sec\n", DFsec(end, start));
+    if (learn)
+		printf("RES took %.2f sec\n", DFsec(end, start));
+    printf("RES fill %3d/%3d\n", my_rs_config.k, my_rs_config.n);
 
 #ifdef FOGML_VERBOSE
     //tinyml_reservoir_verbose(&my_rs_config);
@@ -116,6 +119,9 @@ void fogml_learning(float *time_series_data) {
     }
     fogml_printf("\n");
 #endif
+
+	if (!learn)
+		return;
 
     // update data size
     my_lof_config.n = my_rs_config.k;

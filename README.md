@@ -19,7 +19,8 @@ It sends raw float data in little-endian binary format. For each sample (3 axis 
 12 bytes is needed. The code echoes read data in human-readable format for verification.
 
 ## Results
-***old results without n=k optimization in ff2adda***
+*old results without n=k optimization in commit ff2adda*
+
 In my [Risc-V survey](https://github.com/MrJake222/riscv-ice40) core VexRiscV (smprod_my, RV32I) @ 16MHz, -O2
 learning took from 24s (1st pass) to 31.4s (24th pass) and 0.6s for inference pass:
 ```

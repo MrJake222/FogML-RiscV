@@ -110,6 +110,7 @@ int main() {
 				
 				case 'L':
 					// reservoir fill + learn
+					printf("feature vector size: %d\n", FOGML_VECTOR_SIZE);
 					printf("\nlearning...\n");
 					fogml_learning(my_time_series, 1);
 					printf("finished learning\n\n");

@@ -102,13 +102,13 @@ void fogml_learning(float *time_series_data, int learn) {
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
     if (learn)
-		printf("DSP took %.2f sec\n", DFsec(end, start));
+		printf("DSP took %6.3f sec\n", DFsec(end, start));
 
     start = TIME;
     tinyml_reservoir_sampling(vector, &my_rs_config);
     end = TIME;
     if (learn)
-		printf("RES took %.2f sec\n", DFsec(end, start));
+		printf("RES took %6.3f sec\n", DFsec(end, start));
     printf("RES fill %3d/%3d\n", my_rs_config.k, my_rs_config.n);
 
 #ifdef FOGML_VERBOSE
@@ -129,7 +129,7 @@ void fogml_learning(float *time_series_data, int learn) {
     start = TIME;
     tinyml_lof_learn(&my_lof_config);
     end = TIME;
-    printf("LOF took %.2f sec\n", DFsec(end, start));
+    printf("LOF took %6.3f sec\n", DFsec(end, start));
     
     free(vector);
 }
@@ -143,7 +143,7 @@ void fogml_processing(float *time_series_data, float *score) {
     start = TIME;
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
-    printf("DSP took %.2f sec\n", DFsec(end, start));
+    printf("DSP took %6.3f sec\n", DFsec(end, start));
 
 #ifdef FOGML_VERBOSE
     for(int i = 0; i < FOGML_VECTOR_SIZE; i++) {
@@ -156,7 +156,7 @@ void fogml_processing(float *time_series_data, float *score) {
     start = TIME;
     *score = tinyml_lof_score(vector, &my_lof_config);
     end = TIME;
-    printf("LOF took %.2f sec\n", DFsec(end, start));
+    printf("LOF took %6.3f sec\n", DFsec(end, start));
 
 #ifdef FOGML_VERBOSE
     fogml_printf("LOF Score = ");
@@ -175,12 +175,12 @@ void fogml_classification(float *time_series_data, int* cl) {
     start = TIME;
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
-    printf("RF DSP took %.2f sec\n", DFsec(end, start));
+    printf("RF DSP took %6.3f sec\n", DFsec(end, start));
     
     start = TIME;
     *cl = classifier(vector);
     end = TIME;
-    printf("RF cls took %.2f sec\n", DFsec(end, start));
+    printf("RF cls took %6.3f sec\n", DFsec(end, start));
 
 
 #ifdef FOGML_VERBOSE

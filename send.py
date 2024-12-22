@@ -12,7 +12,8 @@ if len(sys.argv) != 2:
 FILL_SAMPLES = int(sys.argv[1])
 EOT = 0x04
 
-ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
+ser = serial.Serial('/dev/ttyACM2', baudrate=1000000)
+#ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
 
 req = bytes()
 for i, l in enumerate(sys.stdin, start=1):

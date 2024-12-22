@@ -47,12 +47,11 @@ void delay_ms(int x) {
 void* __wrap_malloc(size_t size) { return lwmem_malloc(size); }
 void __wrap_free(void* ptr) { lwmem_free(ptr); }
 
-#define DEBUG
+//#define DEBUG
+#define EOT 0x04
 
 #include "fogml_config.h"
 float my_time_series[ACC_TIME_TICKS * ACC_AXIS];
-
-#define LEARNING_SAMPLES    16
 
 float readfloat() {
 	// read little endian float
@@ -66,15 +65,10 @@ float readfloat() {
 
 int main() {
 	lwmem_region_t regions[] = { { &_heap_start, (&_heap_end - &_heap_start) }, { NULL, 0 }	};
-	//printf("heap start %p (size %d)\n", regions[0].start_addr, regions[0].size);
 	lwmem_assignmem(regions);
 	
-	//printf("please input data\n");
-	printf("fogml vector size: %d\n", FOGML_VECTOR_SIZE);
-	
 	int ticks_stored = 0;
-	int learning = 1;
-	int learning_samples = 0;
+	int pass = 0;
 	
 	while (1) {
 		my_time_series[ticks_stored * ACC_AXIS + 0] = readfloat();
@@ -82,44 +76,71 @@ int main() {
 		my_time_series[ticks_stored * ACC_AXIS + 2] = readfloat();
 		
 		#ifdef DEBUG
+			// cast to prevent warnings (yes, I know about double promotion here)
 			printf("storing tick %2d: %10.7f %10.7f %10.7f\n", ticks_stored,
-				my_time_series[ticks_stored * ACC_AXIS + 0],
-				my_time_series[ticks_stored * ACC_AXIS + 1],
-				my_time_series[ticks_stored * ACC_AXIS + 2]);
+				(double)my_time_series[ticks_stored * ACC_AXIS + 0],
+				(double)my_time_series[ticks_stored * ACC_AXIS + 1],
+				(double)my_time_series[ticks_stored * ACC_AXIS + 2]);
 		#endif
 			
 		ticks_stored++;
 
 		if (ticks_stored == ACC_TIME_TICKS) {
-			 printf("processing...\n");
+			pass++;
 			
-			if (learning) {
-				printf("learning...\n");
-
-				fogml_learning(my_time_series);
-				learning_samples++;
-
-				if (learning_samples == LEARNING_SAMPLES) {
-					learning_samples = 0;
-					learning = 0;
-					//printf("learning end\n");
-				}
-				
-				printf("finished learning\n");
-			}
-			else {
-				printf("classifying...\n");
-				
-				float score;
-				fogml_processing(my_time_series, &score);				
-				printf("LOF Score = %5.2f, %s\n", score, (score > 2.5f ? "fail" : "ok"));
-			}
+			#ifdef DEBUG
+			printf("pass %2d select action...\n", pass);
+			#endif
 			
 			int cl;
-			fogml_classification(my_time_series, &cl);
-			printf("RF class = %d\n", cl);
-						
+			char action = readchar();
+			switch (action) {
+				case 'R':
+					// reservoir fill only (no learn)
+					#ifdef DEBUG
+					printf("filling...\n");
+					#endif
+					
+					fogml_learning(my_time_series, 0);
+					
+					#ifdef DEBUG
+					printf("finished filling...\n");
+					#endif
+					break;
+				
+				case 'L':
+					// reservoir fill + learn
+					printf("feature vector size: %d\n", FOGML_VECTOR_SIZE);
+					printf("\nlearning...\n");
+					fogml_learning(my_time_series, 1);
+					printf("finished learning\n\n");
+					break;
+				
+				case 'C':
+					// classify
+					#ifdef DEBUG
+					printf("classifying...\n");
+					#endif
+					
+					float score;
+					fogml_processing(my_time_series, &score);				
+					printf("LOF Score = %5.2f, %s\n\n", (double)score, (score > 2.5f ? "fail" : "ok"));
+					
+					break;
+					
+				case 'F':
+					// forest
+					//fogml_classification(my_time_series, &cl);
+					//printf("RF class = %d\n", cl);
+					break;
+					
+				default:
+					printf("incorrect action: %c\n", action);
+					break;
+			}
+			
 			ticks_stored = 0;
+			printf("%c\n", EOT);
 		}
 	}
 }

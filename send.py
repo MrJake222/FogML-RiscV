@@ -5,43 +5,38 @@ import time
 import struct
 import serial
 
+if len(sys.argv) != 2:
+	print(f"usage: {sys.argv[0]} [reservoir fill level]")
+	exit(1)
+
+FILL_SAMPLES = int(sys.argv[1])
+EOT = 0x04
+
 ser = serial.Serial('/dev/ttyACM2', baudrate=1000000)
+#ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
 
-def getline(prn=True, end="\n"):
-	line = ser.readline().decode("utf-8").strip()
-	if prn:
-		print(line, end=end)
-	return line
-
-getline()
-
-for i, l in enumerate(sys.stdin):
+req = bytes()
+for i, l in enumerate(sys.stdin, start=1):
 	for x in l.strip().split():
-		x = float(x)
-		x = struct.pack("<f", x)
-		ser.write(x)
-	getline(prn=False) # storing tick
+		req += struct.pack("<f", float(x))
 	
-	if (i+1) % 64 == 0:
-		getline() # processing
-		lc = getline() # learning / classifying
-		
-		start = time.time()
-		if lc.startswith("learning"):
-			getline() # DSP time
-			getline() # RES time
-			getline() # LOF time
+	if i % 64 == 0:
+		samples = i//64
+		if samples < FILL_SAMPLES:
+			action = 'R'
+		elif samples == FILL_SAMPLES:
+			action = 'L'
 		else:
-			getline() # DSP time
-			getline() # LOF time
-		getline() # finished / lof score
-		end = time.time()
-		print(f"[P {(i+1)//64:02d}] lof took: {end - start:.2f} sec")
+			action = 'C'
 
-		start = time.time()
-		getline() # RF DSP
-		getline() # RF cls
-		getline() # RF result
-		end = time.time()
-		print(f"[P {(i+1)//64:02d}] rf took: {end - start:.2f} sec")
-		print()
+		req += action.encode("utf-8")
+		ser.write(req)
+		req = bytes()
+		
+		while True:
+			line = ser.readline()
+			if line[0] == EOT:
+				break
+			print(line.decode("utf-8").strip())
+		
+		# print()

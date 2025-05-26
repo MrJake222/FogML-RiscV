@@ -20,7 +20,7 @@ option(BUILD_SHARED_LIBS OFF)
 set(OPTS
 		-march=rv32i
 		
-		-Os
+		-O2
 		-Wall -g
 		-ffreestanding
 		-nostartfiles

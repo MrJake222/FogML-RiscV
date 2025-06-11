@@ -98,6 +98,8 @@ tinyml_lof_config_t my_lof_config = {
   .data = my_reservoir //set of points
 };
 
+static int C() { int c; asm volatile ("rdcycle %0" : "=r"(c)); return c; }
+
 #define DFsec(a,b) (  (double) ((a-b) / 1000000.0f)  )
 
 void fogml_learning(float *time_series_data, int learn) {
@@ -108,12 +110,15 @@ void fogml_learning(float *time_series_data, int learn) {
     float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
     
     int start, end;
+    int cstart, cend;
 
     start = TIME;
+    cstart = C();
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
+    cend = C();
     if (learn)
-		printf("DSP took %6.3f sec\n", DFsec(end, start));
+		printf("DSP took %6.3f sec (%d cycles)\n", DFsec(end, start), cend-cstart);
 
     start = TIME;
     tinyml_reservoir_sampling(vector, &my_rs_config);
@@ -150,11 +155,14 @@ void fogml_processing(float *time_series_data, float *score) {
     float *vector = (float*)malloc(sizeof(float) * FOGML_VECTOR_SIZE);
     
     int start, end;
+	int cstart, cend;
     
     start = TIME;
+    cstart = C();
     tinyml_dsp(time_series_data, vector, &my_dsp_config);
     end = TIME;
-    printf("DSP took %6.3f sec\n", DFsec(end, start));
+    cend = C();
+    printf("DSP took %6.3f sec (%d cycles)\n", DFsec(end, start), cend-cstart);
 
 #ifdef FOGML_VERBOSE
     for(int i = 0; i < FOGML_VECTOR_SIZE; i++) {

@@ -46,9 +46,9 @@ D[i][3] = [0, 0]
 i += 1
 
 # float diff+sq+ac
-D[i][0] = [45903729, 187468*100]
-D[i][1] = [39249427]
-D[i][2] = [13436652, 0, 0, 22057975]
+D[i][0] = [46634016, 151354*100]
+D[i][1] = [39993219]
+D[i][2] = [14184096, 0, 0, 22024523]
 D[i][3] = [0, 0]
 i += 1
 
@@ -60,7 +60,7 @@ T0[j] = "Baseline";					j+=1
 # T0[j] = "Long mul + norm O(logn)";	j+=1
 T0[j] = "Float sq";					j+=1
 T0[j] = "Float diff+sq";			j+=1
-T0[j] = "Float diff+sq+ac";			j+=1
+T0[j] = "Float diff+sq+ac all";			j+=1
 
 T1 = [None]*4
 T1[0] = ["Learn", "DSP"]

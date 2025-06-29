@@ -12,7 +12,7 @@ Radius = 0.9
 
 fig, ax = plt.subplots(2, 2, figsize=(figsize, figsize), tight_layout=True)
 
-for ax, L, t0 in zip(ax.flat, D, T0):
+for axi, (ax, L, t0) in enumerate(zip(ax.flat, D, T0)):
 	norm0 = sumL0 / (2*pi)
 
 	for l in L:
@@ -21,7 +21,7 @@ for ax, L, t0 in zip(ax.flat, D, T0):
 		left = 2*pi - sum(l)
 		l.append(abs(left))
 
-	print(*L, sep="\n")
+	# print(*L, sep="\n")
 	
 	colors_drawio = [
 		#  inside,    frame
@@ -42,6 +42,8 @@ for ax, L, t0 in zip(ax.flat, D, T0):
 			colors = [color1_inside, color2_inside, color_inactive]
 			color_index += 2
 			color_frame = color1_frame
+		elif i == 3 and axi > 0:
+			continue
 		else:
 			color_inside, color_frame = colors_drawio[color_index]
 			colors = [color_inside]*(len(l) - 1) + [color_inactive]
@@ -76,6 +78,12 @@ for ax, L, t0 in zip(ax.flat, D, T0):
 			
 		txts[-1].set_text("")
 		pcts[-1].set_text("")
+		
+		if i == 2:
+			# last ring: square/accum/etc.
+			for j in range(axi):
+				txts[j].set_text("")
+				pcts[j].set_text("")
 	
 	ax.set_title(t0)
 	ax.title.set_fontsize(fontsize2)

@@ -1,2 +1,3 @@
 build
 *.geany
+__pycache__

@@ -26,7 +26,7 @@ extern "C" {
 
 // DIGITAL SIGNAL PROCESSING
 // number of features - depends on the DSP blocks
-#define FOGML_VECTOR_SIZE ((TINYML_DSP_BASE_LEN + TINYML_DSP_ENERGY_LEN + TINYML_DSP_CROSSINGS_LEN + TINYML_DSP_FFT_LEN) * ACC_AXIS)
+#define FOGML_VECTOR_SIZE ((TINYML_DSP_BASE_LEN + TINYML_DSP_ENERGY_LEN + TINYML_DSP_CROSSINGS_LEN) * ACC_AXIS)
 
 //BLOCK 1 - BASE
 tinyml_block_base_config_t block1_config;
@@ -52,24 +52,13 @@ tinyml_dsp_block_t block3 = {
     .config = &block3_config
 };
 
-//BLOCK 4 - FFT
-tinyml_block_fft_config_t block4_config = {
-    .freq = 119,
-    .treshold = 0.01
-};
-tinyml_dsp_block_t block4 = {
-    .type = TINYML_DSP_FFT,
-    .config = &block4_config
-};
-
-
 //DSP config
-tinyml_dsp_block_t *blocks_tab[] = {&block1, &block2, &block3, &block4};
+tinyml_dsp_block_t *blocks_tab[] = {&block1, &block2, &block3};
 
 tinyml_dsp_config_t my_dsp_config = {
     .time_ticks = ACC_TIME_TICKS,    
     .axis_n = 3,
-    .blocks_num = 4,
+    .blocks_num = 3,
     .blocks = blocks_tab
 };
 
@@ -97,8 +86,6 @@ tinyml_lof_config_t my_lof_config = {
   .vector_size = FOGML_VECTOR_SIZE, //dimension of each points
   .data = my_reservoir //set of points
 };
-
-static int C() { int c; asm volatile ("rdcycle %0" : "=r"(c)); return c; }
 
 #define DFsec(a,b) (  (double) ((a-b) / 1000000.0f)  )
 

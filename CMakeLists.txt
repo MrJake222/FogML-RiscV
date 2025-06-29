@@ -27,6 +27,7 @@ set(OPTS
 		
 		# warns
 		-Wdouble-promotion -Wfloat-conversion
+		-Wno-strict-aliasing -Wno-unused-function
 		
 		# custom linker script
 		-Wl,-T${CMAKE_SOURCE_DIR}/linker.ld

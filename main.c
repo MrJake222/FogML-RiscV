@@ -92,7 +92,7 @@ int main() {
 			printf("pass %2d select action...\n", pass);
 			#endif
 			
-			int cl;
+			//int cl;
 			char action = readchar();
 			switch (action) {
 				case 'R':

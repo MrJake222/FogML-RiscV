@@ -1,0 +1,239 @@
+RES fill   1/100
+RES fill   2/100
+RES fill   3/100
+RES fill   4/100
+RES fill   5/100
+RES fill   6/100
+RES fill   7/100
+RES fill   8/100
+RES fill   9/100
+RES fill  10/100
+RES fill  11/100
+RES fill  12/100
+RES fill  13/100
+RES fill  14/100
+RES fill  15/100
+RES fill  16/100
+RES fill  17/100
+RES fill  18/100
+RES fill  19/100
+RES fill  20/100
+RES fill  21/100
+RES fill  22/100
+RES fill  23/100
+RES fill  24/100
+RES fill  25/100
+RES fill  26/100
+RES fill  27/100
+RES fill  28/100
+RES fill  29/100
+RES fill  30/100
+RES fill  31/100
+RES fill  32/100
+RES fill  33/100
+RES fill  34/100
+RES fill  35/100
+RES fill  36/100
+RES fill  37/100
+RES fill  38/100
+RES fill  39/100
+RES fill  40/100
+RES fill  41/100
+RES fill  42/100
+RES fill  43/100
+RES fill  44/100
+RES fill  45/100
+RES fill  46/100
+RES fill  47/100
+RES fill  48/100
+RES fill  49/100
+RES fill  50/100
+RES fill  51/100
+RES fill  52/100
+RES fill  53/100
+RES fill  54/100
+RES fill  55/100
+RES fill  56/100
+RES fill  57/100
+RES fill  58/100
+RES fill  59/100
+RES fill  60/100
+RES fill  61/100
+RES fill  62/100
+RES fill  63/100
+RES fill  64/100
+RES fill  65/100
+RES fill  66/100
+RES fill  67/100
+RES fill  68/100
+RES fill  69/100
+RES fill  70/100
+RES fill  71/100
+RES fill  72/100
+RES fill  73/100
+RES fill  74/100
+RES fill  75/100
+RES fill  76/100
+RES fill  77/100
+RES fill  78/100
+RES fill  79/100
+RES fill  80/100
+RES fill  81/100
+RES fill  82/100
+RES fill  83/100
+RES fill  84/100
+RES fill  85/100
+RES fill  86/100
+RES fill  87/100
+RES fill  88/100
+RES fill  89/100
+RES fill  90/100
+RES fill  91/100
+RES fill  92/100
+RES fill  93/100
+RES fill  94/100
+RES fill  95/100
+RES fill  96/100
+RES fill  97/100
+RES fill  98/100
+RES fill  99/100
+feature vector size: 12
+
+learning...
+DSP took  0.036 sec (287757 cycles)
+RES took  0.000 sec
+RES fill 100/100
+284898960
+278258564
+41942647 173123761 102155066 49969747 29603718 22055838
+357600
+LOF took 35.617 sec
+finished learning
+
+DSP took  0.036 sec (284586 cycles)
+2888275
+2836526
+423050 1777115 1049574 512873 298147 222114
+3600
+LOF took  0.364 sec
+LOF Score =  1.29, ok
+
+DSP took  0.036 sec (286080 cycles)
+2925635
+2873898
+425583 1810569 1069726 522743 299465 222181
+3600
+LOF took  0.369 sec
+LOF Score =  1.34, ok
+
+DSP took  0.036 sec (287211 cycles)
+2800871
+2749149
+421419 1693717 999364 487797 295844 222069
+3600
+LOF took  0.353 sec
+LOF Score =  1.17, ok
+
+DSP took  0.036 sec (285064 cycles)
+2924782
+2872864
+423785 1810529 1070118 522311 300452 221998
+3600
+LOF took  0.369 sec
+LOF Score =  1.46, ok
+
+DSP took  0.036 sec (285045 cycles)
+2878809
+2827004
+420075 1768603 1045100 509771 300213 222013
+3600
+LOF took  0.363 sec
+LOF Score =  1.13, ok
+
+DSP took  0.036 sec (285831 cycles)
+2928777
+2876945
+424052 1814251 1072016 524135 300312 222230
+3600
+LOF took  0.369 sec
+LOF Score =  1.17, ok
+
+DSP took  0.036 sec (286457 cycles)
+2886818
+2835199
+422818 1776233 1048652 512913 298008 222040
+3600
+LOF took  0.364 sec
+LOF Score =  1.25, ok
+
+DSP took  0.036 sec (287460 cycles)
+2889849
+2838185
+424481 1777029 1048400 513961 298479 222096
+3600
+LOF took  0.364 sec
+LOF Score =  1.04, ok
+
+DSP took  0.036 sec (290373 cycles)
+3174968
+3123028
+460242 2013018 1191394 584024 311447 222221
+3600
+LOF took  0.400 sec
+LOF Score = 20.55, fail
+
+DSP took  0.036 sec (287010 cycles)
+3170266
+3117643
+456624 2010976 1189816 583560 311881 222062
+3600
+LOF took  0.399 sec
+LOF Score = 13.95, fail
+
+DSP took  0.036 sec (287970 cycles)
+3161359
+3108707
+449622 2010582 1190054 582928 310295 222108
+3600
+LOF took  0.398 sec
+LOF Score = 14.77, fail
+
+DSP took  0.036 sec (288971 cycles)
+3172260
+3119610
+458294 2012938 1190746 584592 310211 222067
+3600
+LOF took  0.400 sec
+LOF Score = 14.00, fail
+
+DSP took  0.036 sec (287106 cycles)
+3167127
+3114549
+452757 2013032 1190472 584960 310717 221943
+3600
+LOF took  0.399 sec
+LOF Score = 15.79, fail
+
+DSP took  0.036 sec (288788 cycles)
+3168610
+3115634
+455798 2011394 1189794 584000 310122 222220
+3600
+LOF took  0.399 sec
+LOF Score = 15.03, fail
+
+DSP took  0.036 sec (287354 cycles)
+3165446
+3112423
+453189 2010452 1189252 583600 310549 222133
+3600
+LOF took  0.399 sec
+LOF Score = 11.78, fail
+
+DSP took  0.036 sec (287467 cycles)
+3163127
+3110837
+453420 2009986 1189850 582536 309091 222240
+3600
+LOF took  0.399 sec
+LOF Score = 10.52, fail

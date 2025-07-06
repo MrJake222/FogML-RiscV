@@ -58,9 +58,9 @@ T0[j] = "Baseline";					j+=1
 # T0[j] = "Verilog";					j+=1
 # T0[j] = "Long mul";					j+=1
 # T0[j] = "Long mul + norm O(logn)";	j+=1
-T0[j] = "Float sq";					j+=1
-T0[j] = "Float diff+sq";			j+=1
-T0[j] = "Float diff+sq+ac all";			j+=1
+T0[j] = "Float square";					j+=1
+T0[j] = "Float diff+square";			j+=1
+T0[j] = "Float diff+square+acc cleanup";j+=1
 
 T1 = [None]*4
 T1[0] = ["Learn", "DSP"]

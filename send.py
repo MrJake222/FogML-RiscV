@@ -5,15 +5,19 @@ import time
 import struct
 import serial
 
-if len(sys.argv) != 2:
+if len(sys.argv) == 3:
+	PORT = sys.argv[2]
+elif len(sys.argv) == 2:
+	PORT = "/dev/ttyACM2"
+else:
 	print(f"usage: {sys.argv[0]} [reservoir fill level]")
 	exit(1)
 
+ser = serial.Serial(PORT, baudrate=1000000)
 FILL_SAMPLES = int(sys.argv[1])
 EOT = 0x04
 
-ser = serial.Serial('/dev/ttyACM2', baudrate=1000000)
-#ser = serial.Serial('/dev/ttyACM3', baudrate=1000000)
+print(f"Opening port {PORT} and sending {FILL_SAMPLES} samples")
 
 req = bytes()
 for i, l in enumerate(sys.stdin, start=1):

@@ -93,4 +93,4 @@ for axi, (ax, L, t0) in enumerate(zip(ax.flat, D, T0)):
 	ax.set(aspect="equal")
 	ax.set_axis_off()
 
-plt.savefig("prof.pdf", bbox_inches='tight', pad_inches=0)
+plt.savefig("prof5.pdf", bbox_inches='tight', pad_inches=0)

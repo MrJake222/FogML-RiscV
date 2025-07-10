@@ -50,6 +50,12 @@ add_compile_definitions(
 		PRINTF_INCLUDE_CONFIG_H=1
 		)
 
+# custom fpu support
+option(XFPU "Enable a custom FPU support" OFF)
+if(XFPU)
+	add_compile_definitions(RISCV_XFPU)
+endif(XFPU)
+
 include_directories(include)
 
 # libraries
